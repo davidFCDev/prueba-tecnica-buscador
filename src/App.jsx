@@ -1,30 +1,27 @@
 import { useState } from "react";
 import "./App.css";
-import responseMovies from "./mocks/with-results.json";
 import { Movies } from "./components/Movies";
+import { useMovies } from "./hooks/useMovies";
 
 function App() {
-  const movies = responseMovies.Search;
-  const [query, setQuery] = useState([]);
-
-  const mappedMovies = movies.map((movie) => ({
-    id: movie.imdbID,
-    year: movie.Year,
-    title: movie.Title,
-    poster: movie.Poster,
-  }));
-
+  const { movies } = useMovies();
 
   const handleSearch = (event) => {
     event.preventDefault();
     console.log("searching");
   };
 
+  const handleChange = (event) => {};
+
   return (
     <div className="page">
       <header>
         <form onSubmit={handleSearch}>
-          <input name="query" />
+          <input
+            onChange={handleChange}
+            placeholder="Avengers, matrix..."
+            name="query"
+          />
           <button>Search</button>
         </form>
       </header>
